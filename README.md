@@ -1,48 +1,70 @@
-# chat-server
+# TCP Client with Real-Time Chat & File Transfer
 
-## Overview
+This is a C-based interactive TCP client that connects to a server at `127.0.0.1:9999` and supports:
 
-This is a simple **TCP chat program in C** using sockets and `poll()`.
-It consists of a **server** and a **client** that can exchange messages interactively.
-
----
-
-## Files
-
-* `server.c` – waits for a client and relays messages.
-* `client.c` – connects to the server and exchanges messages.
+- Live, character-by-character chat
+- Backspace and prompt handling
+- Sending and receiving files using Base64 encoding
+- Text preview of received files
 
 ---
 
-## Build
+## Features
+
+-  Real-time chat input/output
+-  Custom line-based protocol
+-  File sending (`/send <path>`)
+-  File receiving with preview if it's a text file
+-  Terminal raw mode input (non-blocking, no echo)
+
+---
+
+## 🔧 Compilation
+
+Make sure you have `gcc` installed.
 
 ```bash
-gcc server.c -o server
-gcc client.c -o client
+gcc client.c -o client -Wall -Wextra
+````
+
+---
+
+## 🖥️ Running the Client
+
+Start a compatible server **first** (must listen on `127.0.0.1:9999`).
+
+Then run the client:
+
+```bash
+./client
+```
+
+If successful, you'll see:
+
+```
+Connected to server.
+[HH:MM] Client:
 ```
 
 ---
 
-## Run
+## 📤 Sending Files
 
-1. Start the server:
+Inside the client, type:
 
-   ```bash
-   ./server
-   ```
-2. In another terminal, start the client:
+```
+/send path/to/your/file.txt
+```
 
-   ```bash
-   ./client
-   ```
-
-Type messages in either terminal — they will be sent to the other side.
+Then press **Enter** to send the file to the server.
 
 ---
 
-## Notes
+## 📥 Receiving Files
 
-* Runs on port **9999**.
-* Handles **one client** at a time.
-* Messages are up to 255 bytes.
+When a file is received:
+
+* It is saved as `received_<filename>`.
+* If it's mostly printable text, a preview will be shown in the terminal.
+
 
