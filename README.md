@@ -1,5 +1,4 @@
 # TCP Client with Real-Time Chat & File Transfer
-
 This is a C-based interactive TCP client that connects to a server at `127.0.0.1:9999` and supports:
 
 - Live, character-by-character chat
